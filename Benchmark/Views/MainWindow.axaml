@@ -1,0 +1,50 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Benchmark.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:oxy="clr-namespace:OxyPlot.Avalonia;assembly=OxyPlot.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Benchmark.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="xdd" Width="640"
+        Height="480">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+    <Grid>
+        <oxy:Plot Title="{Binding Title}" 
+                  IsLegendVisible="True">
+            <oxy:Plot.Legends>
+                <oxy:Legend LegendTitle="Legend" LegendFontSize="20" LegendPosition="TopLeft"/>
+            </oxy:Plot.Legends>
+            <oxy:Plot.Series>
+                <oxy:LineSeries Title="SourceArray" 
+                                DataFieldX="N"
+                                DataFieldY="SourceArray"
+                                Items="{Binding Measurements}"
+                                InterpolationAlgorithm="{Binding InterpolationAlgorithm}"
+                                StrokeThickness="2" Color="Blue" 
+                                />
+                <oxy:LineSeries Title="ArrayOfSums" 
+                                DataFieldX="N"
+                                DataFieldY="ArrayOfSums"
+                                Items="{Binding Measurements}"
+                                InterpolationAlgorithm="{Binding InterpolationAlgorithm}"
+                                StrokeThickness="2"
+                                Color="Red" />
+                <oxy:LineSeries Title="BinaryIndexedTree" 
+                                DataFieldX="N"
+                                DataFieldY="BinaryIndexedTree"
+                                Items="{Binding Measurements}"
+                                InterpolationAlgorithm="{Binding InterpolationAlgorithm}"
+                                StrokeThickness="2"
+                                Color="Green" />
+            </oxy:Plot.Series>
+        </oxy:Plot>
+    </Grid>
+
+</Window>
